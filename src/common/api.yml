@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: XoseDev Mail Api
+  description:  XoseDev Mail Api
+  version: '1.0'
+  contact:
+    name: xose dev
+    email: xosedev@gmail.com
+servers:
+  - url: /api/v3
+tags:
+  - name: Mail
+    description: API Mail
+  - name: General
+    description: Utilities Service
+paths:
+  /healthcheck:
+    get:
+      operationId: healthcheck
+      summary: check service status.
+      description: check service status.
+      tags:
+        - General
+      responses:
+        200:
+          description: Returns an object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseHealthCheck'
+        404:
+          description: Not found
+          content: {}
+        500:
+          description: Internal server error
+          content: {}
+        default:
+          description: The resource you were trying to reach had an error.
+          content:
+            application/json:
+              schema:
+                type: string #test
+      x-codegen-request-body-name: body
+  /mail/send-mail:
+    post:
+      tags:
+        - Mail
+      summary: Sen Mail.
+      operationId: Send Mail
+      requestBody:
+        description: mail
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mail'
+      responses:
+        200:
+          description: Returns an object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400Response'
+        500:
+          description: Internal server error
+          content: {}
+        default:
+          description: The resource you were trying to reach had an error.
+          content:
+            application/json:
+              schema:
+                type: string
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    ResponseHealthCheck:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 200
+        enabled:
+          type: string
+          example: 'TRUE'
+    Error400Response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Error getting the orchestrator
+        status:
+          type: string
+          example: 400
+        system:
+          type: string
+          example: orchestrator 
+    Mail:
+      description: Mail entity
+      properties:
+        userName:
+          type: string
+          description: name of Emisor
+          example: 'Jhon Doe'
+        from:
+          type: string
+          description: mail of emisor
+          example: 'test@corp.com'
+        to:
+          type: string
+          description: mail of receptor
+          example: 'test@corp.com'
+        subject:
+          type: string
+          description: subject to mail
+          example: 'subject test'
+        text:
+          type: string
+          description: text to mail
+          example: 'Test'
+        html:
+          type: string
+          description: html mail
+          example: '<div>Test</div>'
