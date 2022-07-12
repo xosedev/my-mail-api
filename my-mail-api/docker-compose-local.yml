@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  my-mail-api:
+    container_name: "my-mail-api"
+    image: "my-mail-api"
+    build: ..
+    ports:
+      - "0.0.0.0:5000:5000"
+    env_file: ../.env
+    environment:
+      PORT: 5000
+    networks:
+      - xosedev
+networks:
+  xosedev:
