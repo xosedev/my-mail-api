@@ -1,4 +1,4 @@
-# xosedev-portfolio-orchestrator
+# xosedev-my-mail-api
 
 ## Quick Start
 
@@ -64,9 +64,11 @@ or debug them
 npm run test:debug
 ```
 
+```Docker CMD
 up:
 	docker-compose -f ./my-mail-api/docker-compose-local.yml up -d
 down:
 	docker-compose -f ./my-mail-api/docker-compose-local.yml down --rmi 'all'
 logs:
 	docker-compose -f ./my-mail-api/docker-compose-local.yml logs -f
+```

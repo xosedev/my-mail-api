@@ -7,6 +7,7 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import routes from '../routes'
 
+
 export const app = express()
 const corsOptionsDelegate = (req, callback) => {
   const corsOptions = { origin: true }
